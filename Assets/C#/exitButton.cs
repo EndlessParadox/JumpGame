@@ -1,15 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 
 public class exitButton : MonoBehaviour
 {
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
     void Update()
     {
-        if (Input.GetMouseButton(0))
 
-            Application.Quit();
-           // print("游戏退出");
-
+    }
+    public void OnCloseGame()
+    {
+        Application.Quit();
     }
 }

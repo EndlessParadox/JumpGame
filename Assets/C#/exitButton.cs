@@ -3,8 +3,6 @@ using System.Collections;
 
 public class exitButton : MonoBehaviour
 {
-
-    // Use this for initialization
     void Start()
     {
 

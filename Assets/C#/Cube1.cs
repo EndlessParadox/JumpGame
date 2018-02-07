@@ -11,7 +11,7 @@ public class Cube1 : MonoBehaviour
     Rigidbody rbody;
 
     public Text countText;
-    public Text deathText;
+    public Text overText;
 
     float coordinate;//坐标
 
@@ -32,7 +32,7 @@ public class Cube1 : MonoBehaviour
          count = 0;
         countText.text = "Count:" + count;
 
-        deathText.text = "  ";
+        overText.text = "  ";
     }
 
     void Update()
@@ -118,7 +118,7 @@ public class Cube1 : MonoBehaviour
         }
         else
         {
-            deathText.text = "You are died!";
+            overText.text = "Game over!";
         }
     }
 }

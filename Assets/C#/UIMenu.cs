@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIMenu : MonoBehaviour {
 
@@ -11,7 +12,9 @@ public class UIMenu : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         btnExit.onClick.AddListener(Exit);
-	}
+  
+
+    }
 
     void Exit()
     {
@@ -20,6 +23,9 @@ public class UIMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        if (Input.GetMouseButton(0))
+            SceneManager.LoadScene("jump");
+        if (Input.GetMouseButton(1))
+            Application.Quit();
+    }
 }

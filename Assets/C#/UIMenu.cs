@@ -19,7 +19,7 @@ public class UIMenu : MonoBehaviour {
 
     void Revive()
     {
-        Button btn = btnRevive.GetComponent<Button>();
+  
         SceneManager.LoadScene("jump");
 
     }
@@ -34,9 +34,6 @@ public class UIMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //if (Input.GetMouseButton(0))
-        //    SceneManager.LoadScene("jump");
-        //if (Input.GetMouseButton(1))
-        //    Application.Quit();
+       
     }
 }

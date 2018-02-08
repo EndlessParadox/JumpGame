@@ -7,12 +7,15 @@ public class Cube1 : MonoBehaviour
     bool OnGround;   //是否在地面上
     float jumpPressure = 0f;  //蓄力值
     float MinjumpPressure = 2f;  //蓄力最小值
-    public float MaxjumpPressure = 10f;  // 蓄力最大值
+    public float MaxjumpPressure = 8f;  // 蓄力最大值
     Rigidbody rbody;
+    
 
     public Text countText;
     public Text overText;
 
+    public Canvas UIMenu;//UI组件
+    
     float coordinate;//坐标
 
     public GameObject objFloor;
@@ -29,10 +32,12 @@ public class Cube1 : MonoBehaviour
 
         coordinate = 4;//初始坐标为4，（第二个方块的位置）
 
-         count = 0;
+        count = 0;
         countText.text = "Count:" + count;
-
         overText.text = "  ";
+
+        UIMenu.gameObject.SetActive(false);
+       
     }
 
     void Update()
@@ -40,7 +45,7 @@ public class Cube1 : MonoBehaviour
 
         if (OnGround)  //判断是否在地面上
         {
-            if (Input.GetButton("Jump"))  //hold  按下不放空格键
+            if (Input.touchCount >0) //hold  按下不放空格键
             {
                 if (jumpPressure < MaxjumpPressure)
                 {  //如果当前蓄力值小于最大值
@@ -122,6 +127,8 @@ public class Cube1 : MonoBehaviour
         else
         {
             overText.text = "Game over!";
+            UIMenu.gameObject.SetActive(true);
+
         }
     }
 }

@@ -45,7 +45,12 @@ public class Cube1 : MonoBehaviour
 
         if (OnGround)  //判断是否在地面上
         {
+#if UNITY_EDITOR
+            if(Input.GetButton("Jump"))
+#endif
+#if UNITY_ANDROID
             if (Input.touchCount >0) //hold  按下不放空格键
+#endif
             {
                 if (jumpPressure < MaxjumpPressure)
                 {  //如果当前蓄力值小于最大值
@@ -81,7 +86,7 @@ public class Cube1 : MonoBehaviour
         //检测是否碰撞到地面
         if (other.gameObject.tag == "Ground") 
         {
-            if (other.contacts[0].normal == Vector3.up)//只有碰撞点的法线方向为上时才算碰撞到
+            if (other.contacts[0].normal  != Vector3.left && other.contacts[0].normal != Vector3.right && other.contacts[0].normal != Vector3.forward && other.contacts[0].normal != Vector3.back)//只有碰撞点的法线方向为上时才算碰撞到
             {
                 if (!OnGround)
                 {
@@ -118,9 +123,9 @@ public class Cube1 : MonoBehaviour
                     float fOffsetX = offsetIdx / 2 == 0 ? (offsetIdx % 2 == 0 ? fOffset : 0) : 0;//只有offset为0的时候 作x轴方向的偏移
                     float fOffsetZ = offsetIdx / 2 == 1 ? (offsetIdx % 2 == 0 ? fOffset : fOffset * -1) : 0;//offset为2时z轴正向偏移 为3时z轴负向偏移
                     objNew.transform.position = other.transform.position + new Vector3(fOffsetX, 0, fOffsetZ);//直接在这个台子坐标的基础上作偏移
-                                                                                                              //Random.Range随机数生成
-                                                                                                              //objNew.transform.parent = objFloorRoot.transform ;
-                                                                                                              //coordinate = coordinate + Random.Range(3,5);
+                    //Random.Range随机数生成
+                    //objNew.transform.parent = objFloorRoot.transform ;
+                    //coordinate = coordinate + Random.Range(3,5);
                 }
             }
         }
@@ -128,7 +133,6 @@ public class Cube1 : MonoBehaviour
         {
             overText.text = "Game over!";
             UIMenu.gameObject.SetActive(true);
-
         }
     }
 }

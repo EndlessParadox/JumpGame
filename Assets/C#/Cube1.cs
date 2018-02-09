@@ -53,6 +53,8 @@ public class Cube1 : MonoBehaviour
 
     }
 
+    protected int nFwd = 1;
+
     void Update()
     {
 
@@ -60,14 +62,14 @@ public class Cube1 : MonoBehaviour
         {
             if (Input.GetButton("Jump"))  //hold  按下不放空格键
             {
-                if (jumpPressure < MaxjumpPressure)
+                if (( nFwd == 1 && jumpPressure < MaxjumpPressure) || (nFwd == -1 && jumpPressure > 0))
                 {  //如果当前蓄力值小于最大值
-                    jumpPressure = jumpPressure + Time.deltaTime * 5f; //则每帧递增当前蓄力值
-
+                    jumpPressure = jumpPressure + Time.deltaTime * 5f * nFwd; //则每帧递增当前蓄力值
                 }
                 else
                 {  //达到最大值时，当前蓄力值就等于最大蓄力值
-                    jumpPressure = MaxjumpPressure;
+                    // jumpPressure = MaxjumpPressure;
+                    nFwd = -1 * nFwd;
                 }
             }
 
@@ -141,7 +143,7 @@ public class Cube1 : MonoBehaviour
                                                                                                               //objNew.transform.parent = objFloorRoot.transform ;
                                                                                                               //coordinate = coordinate + Random.Range(3,5);
 
-                  
+                    transform.forward = (objNew.transform.position - other.transform.position).normalized;
                 }
             }
         }

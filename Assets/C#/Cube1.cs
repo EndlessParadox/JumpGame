@@ -30,6 +30,9 @@ public class Cube1 : MonoBehaviour
     protected int[] lstOffsetIdx = new int[] { 0, 2, 3 };
     private int offsetIdx = 0; //偏移标识 0 ↑ 2 ← 3 → 未免交叉不允许走回头路
 
+    public GameObject audio;
+
+
     void Start()
     {
         slider.value = MinjumpPressure = f;//初始化滚动条位置
@@ -148,6 +151,8 @@ public class Cube1 : MonoBehaviour
             //UIMenu.gameObject.SetActive(true);
             reviveButton.gameObject.SetActive(true);
             exitButton.gameObject.SetActive(true);
+
+            DontDestroyOnLoad(audio);
 
         }
     }

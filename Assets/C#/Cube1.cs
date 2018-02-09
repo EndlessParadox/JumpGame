@@ -35,8 +35,9 @@ public class Cube1 : MonoBehaviour
 
     void Start()
     {
-        slider.value = MinjumpPressure = f;//初始化滚动条位置
-          
+        //slider.value = MinjumpPressure = f;//初始化滚动条位置
+        slider.value = f;
+
         OnGround = true;  //初始设置在地面上
         rbody = GetComponent<Rigidbody>();  //获取组件
 
@@ -49,7 +50,6 @@ public class Cube1 : MonoBehaviour
        // UIMenu.gameObject.SetActive(false);
         reviveButton.gameObject.SetActive(false);
         exitButton.gameObject.SetActive(false);
-
 
     }
 
@@ -79,13 +79,13 @@ public class Cube1 : MonoBehaviour
                 {   //轻轻按下就松开 当前蓄力值=最小蓄力值赋值
                     //按住不松但未大于最大蓄力值 当前蓄力值=递增蓄力值
                     jumpPressure = jumpPressure + MinjumpPressure;
+                    Debug.LogWarning(jumpPressure + "---" + MinjumpPressure);
                     //给一个向上速度
                     //offsetIdx为0时 给x轴正向速度 /offsetIdx为2时 给z轴正向速度 /offsetIdx为3时 给z轴负向速度 
                     rbody.velocity = new Vector3((0.5f + jumpPressure) * (offsetIdx == 0 ? 1 : 0), jumpPressure, (0.5f + jumpPressure) * (offsetIdx / 2 == 1 ? (offsetIdx % 2 == 0 ? 1 :  -1) : 0));
 
                     jumpPressure = 0f; //升空后 蓄力值重设
                     OnGround = false;
-
                 }
             }
         }
@@ -94,8 +94,6 @@ public class Cube1 : MonoBehaviour
         slider.value = f;
 
     }
-
-   
 
     void OnCollisionEnter(Collision other)
     {

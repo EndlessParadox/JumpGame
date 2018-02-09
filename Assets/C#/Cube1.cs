@@ -35,8 +35,9 @@ public class Cube1 : MonoBehaviour
 
     void Start()
     {
-        slider.value = MinjumpPressure = f;//初始化滚动条位置
-          
+        //slider.value = MinjumpPressure = f;//初始化滚动条位置
+        slider.value = f;
+         
         OnGround = true;  //初始设置在地面上
         rbody = GetComponent<Rigidbody>();  //获取组件
 
@@ -60,9 +61,14 @@ public class Cube1 : MonoBehaviour
 
         if (OnGround)  //判断是否在地面上
         {
-            if (Input.GetButton("Jump"))  //hold  按下不放空格键
-            {
-                if (( nFwd == 1 && jumpPressure < MaxjumpPressure) || (nFwd == -1 && jumpPressure > 0))
+#if UNITY_EDITOR
+               if (Input.GetButton("Jump"))  //hold  按下不放空格键
+#endif
+#if UNITY_ANDROID
+                if (Input.touchCount > 0)
+#endif
+                {
+                    if (( nFwd == 1 && jumpPressure < MaxjumpPressure) || (nFwd == -1 && jumpPressure > 0))
                 {  //如果当前蓄力值小于最大值
                     jumpPressure = jumpPressure + Time.deltaTime * 5f * nFwd; //则每帧递增当前蓄力值
                 }
@@ -154,9 +160,9 @@ public class Cube1 : MonoBehaviour
             reviveButton.gameObject.SetActive(true);
             exitButton.gameObject.SetActive(true);
 
-            DontDestroyOnLoad(audio);
+            audio.GetComponent<AudioSource>().Stop();
+
 
         }
     }
 }
-

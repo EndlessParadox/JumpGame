@@ -7,9 +7,9 @@ using UnityEngine.SceneManagement;
 public class UIMenu : MonoBehaviour {
 
     public Button btnExit;
-
     public Button btnRevive;
-	// Use this for initialization
+
+    public Slider Slider;
 	void Start () {
 
        btnExit.onClick.AddListener(Exit);

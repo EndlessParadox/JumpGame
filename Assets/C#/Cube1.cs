@@ -6,16 +6,21 @@ public class Cube1 : MonoBehaviour
 {
     bool OnGround;   //是否在地面上
     float jumpPressure = 0f;  //蓄力值
-    float MinjumpPressure = 2f;  //蓄力最小值
-    public float MaxjumpPressure = 8f;  // 蓄力最大值
+    float MinjumpPressure = 1.5f;  //蓄力最小值
+    public float MaxjumpPressure = 5f;  // 蓄力最大值
     Rigidbody rbody;
     
 
     public Text countText;
     public Text overText;
 
-    public Canvas UIMenu;//UI组件
-    
+    //public Canvas UIMenu;//UI组件
+    public Button reviveButton;
+    public Button exitButton;
+
+    public Slider slider;//滚动条
+    float f;
+
     float coordinate;//坐标
 
     public GameObject objFloor;
@@ -27,6 +32,8 @@ public class Cube1 : MonoBehaviour
 
     void Start()
     {
+        slider.value = MinjumpPressure = f;//初始化滚动条位置
+          
         OnGround = true;  //初始设置在地面上
         rbody = GetComponent<Rigidbody>();  //获取组件
 
@@ -36,8 +43,11 @@ public class Cube1 : MonoBehaviour
         countText.text = "Count:" + count;
         overText.text = "  ";
 
-        UIMenu.gameObject.SetActive(false);
-       
+       // UIMenu.gameObject.SetActive(false);
+        reviveButton.gameObject.SetActive(false);
+        exitButton.gameObject.SetActive(false);
+
+
     }
 
     void Update()
@@ -45,7 +55,7 @@ public class Cube1 : MonoBehaviour
 
         if (OnGround)  //判断是否在地面上
         {
-            if (Input.touchCount >0) //hold  按下不放空格键
+            if (Input.GetButton("Jump"))  //hold  按下不放空格键
             {
                 if (jumpPressure < MaxjumpPressure)
                 {  //如果当前蓄力值小于最大值
@@ -74,7 +84,13 @@ public class Cube1 : MonoBehaviour
                 }
             }
         }
+
+        f = jumpPressure;
+        slider.value = f;
+
     }
+
+   
 
     void OnCollisionEnter(Collision other)
     {
@@ -127,7 +143,9 @@ public class Cube1 : MonoBehaviour
         else
         {
             overText.text = "Game over!";
-            UIMenu.gameObject.SetActive(true);
+            //UIMenu.gameObject.SetActive(true);
+            reviveButton.gameObject.SetActive(true);
+            exitButton.gameObject.SetActive(true);
 
         }
     }

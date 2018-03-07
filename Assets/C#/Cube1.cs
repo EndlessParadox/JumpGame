@@ -37,11 +37,6 @@ public class Cube1 : MonoBehaviour
     {
         //slider.value = MinjumpPressure = f;//初始化滚动条位置
         slider.value = f;
-<<<<<<< HEAD
-         
-=======
-
->>>>>>> 24fc3929b8276e8ee6004a4406f5ccf40b0bbff2
         OnGround = true;  //初始设置在地面上
         rbody = GetComponent<Rigidbody>();  //获取组件
 
